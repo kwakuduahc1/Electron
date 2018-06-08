@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Electron.Context
 {
@@ -36,10 +37,13 @@ namespace Electron.Context
 
     public class Locations
     {
+        [Key]
         public int LocationsID { get; set; }
 
+        [Required]
         public string Location { get; set; }
 
+        [Required]
         public string Region { get; set; }
     }
 }
