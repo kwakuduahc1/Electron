@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Electron.Context;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +6,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using el = ElectronNET.API;
 
 namespace Electron
 {
@@ -56,6 +54,7 @@ namespace Electron
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+            Task.Run(async () => await el.Electron.WindowManager.CreateWindowAsync());
         }
     }
 }

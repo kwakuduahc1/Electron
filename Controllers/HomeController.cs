@@ -16,8 +16,13 @@ namespace Electron.Controllers
 
         public HomeController(DbContextOptions<ApplicationDbContext> dbContextOptions) => context = dbContextOptions;
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            using (var db = new ApplicationDbContext(context))
+            {
+                //Make sure the database has been created;
+                await db.Database.EnsureCreatedAsync();
+            }
             return View();
         }
 
@@ -29,15 +34,11 @@ namespace Electron.Controllers
 
         public async Task<IEnumerable> Locations()
         {
-            //Since the Index method is called way earlier that other methods, it would be a good place to ensure the database has been created
-            //Bad idea. Context appeared to be called too early
             using (var db = new ApplicationDbContext(context))
             {
-                //Make sure the database has been created;
-                await db.Database.EnsureCreatedAsync();
-
                 //Apply any pending migrations
-                await db.Database.MigrateAsync();
+                if (db.Database.GetAppliedMigrations().Count() < 1)
+                    await db.Database.MigrateAsync();
                 return await db.Locations.ToListAsync();
             }
         }
