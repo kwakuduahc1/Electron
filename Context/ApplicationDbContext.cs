@@ -22,11 +22,11 @@ namespace Electron.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.Entity<Locations>(x => x.HasData(
-            //    new Locations { Location = "Kumasi", LocationsID = 1, Region = "Ashanti" },
-            //    new Locations { Location = "Accra", LocationsID = 2, Region = "Greater Accra" },
-            //    new Locations { Location = "Nalerigu", Region = "Northern", LocationsID = 3 }
-            //    ));
+            builder.Entity<Locations>(x => x.HasData(
+                new Locations { Location = "Kumasi", LocationsID = 1, Region = "Ashanti" },
+                new Locations { Location = "Accra", LocationsID = 2, Region = "Greater Accra" },
+                new Locations { Location = "Nalerigu", Region = "Northern", LocationsID = 3 }
+                ));
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.// For example, you can rename the ASP.NET Identity table names and more.// Add your customizations after calling base.OnModelCreating(builder);
         }
